@@ -17,7 +17,7 @@ func PrometheusBoot(port int) {
 	go func() {
 		err := http.ListenAndServe(fmt.Sprintf("%s:%d", PROMETHEUS_ADDR, port), nil)
 		if err != nil {
-			log.Fatal("启动失败")
+			log.Fatal("启动失败:", err)
 		}
 		log.Info("监控启动，端口为:", port)
 	}()
