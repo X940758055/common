@@ -7,15 +7,11 @@ import (
 	"net/http"
 )
 
-const (
-	PROMETHEUS_ADDR = "0.0.0.0"
-)
-
-func PrometheusBoot(port int) {
+func PrometheusBoot(addr string, port int) {
 	http.Handle("/metrics", promhttp.Handler())
 
 	go func() {
-		err := http.ListenAndServe(fmt.Sprintf("%s:%d", PROMETHEUS_ADDR, port), nil)
+		err := http.ListenAndServe(fmt.Sprintf("%s:%d", addr, port), nil)
 		if err != nil {
 			log.Fatal("启动失败:", err)
 		}
